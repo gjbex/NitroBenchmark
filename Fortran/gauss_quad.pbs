@@ -1,0 +1,19 @@
+#!/bin/bash -l
+#PBS -l nodes=2:ppn=20
+#PBS -l walltime=00:30:00
+#PBS -l pmem=1gb
+#PBS -m ae
+
+NITRO_PATH="/apps/leuven/nitro/nitro-20150601.111218.dd00e1f80f/"
+JOB_DIR="${VSC_DATA}/Projects/NitroBenchmark/Fortran/Tests/nitro"
+
+if [ -n "${tasks}" ]
+then
+    export NITRO_TASK_FILE="${tasks}"
+    export NITRO_OPTIONS="--job-dir ${JOB_DIR}"
+    export NITRO_COORD_OPTIONS="--exechost-file ${PBS_NODEFILE} --run-local-worker"
+    "${NITRO_PATH}/bin/launch_nitro.sh"
+else
+    echo "tasks file not specified" 1>&2
+    exit 1
+fi
