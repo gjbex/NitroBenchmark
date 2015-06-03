@@ -1,5 +1,5 @@
 F90 = gfortran
-FFLAGS = -O2 -g
+FFLAGS = -O2 -g -static
 LDFLAGS =
 LIBS =
 
