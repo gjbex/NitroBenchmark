@@ -9,14 +9,19 @@ nr_points = 10000
 payload = 'gauss_test.exe'
 cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads}\n'
 
+
+def geeerate_output(script, nr_quads):
+    a = np.random.uniform(-1.5, -0.5)
+    b = np.random.uniform(2.5, 3.5)
+    sys.stdout.write(cmd.format(script=script, nr_points=nr_points,
+                                a=a, b=b, nr_quads=nr_quads))
+
+
 def create_constant(nr_cmds, length, path):
     nr_quads = int(np.ceil(length/time_per_iteration))
     script = os.path.join(path, payload)
     for _ in xrange(nr_cmds):
-        a = np.random.uniform(-1.5, -0.5)
-        b = np.random.uniform(2.5, 3.5)
-        sys.stdout.write(cmd.format(script=script, nr_points=nr_points,
-                                    a=a, b=b, nr_quads=nr_quads))
+        geeerate_output(script, nr_quads)
 
 
 def create_uniform(nr_cmds, min_time, max_time, path):
@@ -25,10 +30,7 @@ def create_uniform(nr_cmds, min_time, max_time, path):
     script = os.path.join(path, 'gauss_test.exe')
     for _ in xrange(nr_cmds):
         nr_quads = np.random.randint(min_n, max_n)
-        a = np.random.uniform(-1.5, -0.5)
-        b = np.random.uniform(2.5, 3.5)
-        sys.stdout.write(cmd.format(script=script, nr_points=nr_points,
-                                    a=a, b=b, nr_quads=nr_quads))
+        geeerate_output(script, nr_quads)
 
 
 def create_gamma(nr_cmds, avg_time, path):
@@ -36,10 +38,7 @@ def create_gamma(nr_cmds, avg_time, path):
     script = os.path.join(path, 'gauss_test.exe')
     for _ in xrange(nr_cmds):
         nr_quads = int(np.ceil(np.random.gamma(avg_n, 1.0)))
-        a = np.random.uniform(-1.5, -0.5)
-        b = np.random.uniform(2.5, 3.5)
-        sys.stdout.write(cmd.format(script=script, nr_points=nr_points,
-                                    a=a, b=b, nr_quads=nr_quads))
+        geeerate_output(script, nr_quads)
 
 
 if __name__ == '__main__':
