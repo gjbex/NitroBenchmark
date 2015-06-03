@@ -22,9 +22,10 @@ To build, simply run the make file, e.g., to use the Intel compiler:
 ```
 $ make F90=ifort
 ```
-The default compiler is GCC.
+The default compiler is GCC, and the executable will be build statically.
 
 To run, `gauss_test.exe` expects three command line arguments:
+
 1. the number of points to compute the quadrature with,
 1. the lower bound of the integration domain,
 1. the upper bound of the integration domain, and
@@ -41,6 +42,7 @@ $ ./gauss_test.exe 100 -1.0 3.0 1
 To generate a workload for Nitro, the `gauss_quad_load.py` script can be
 used.  It can generate workloads where the execution time of a work item
 is:
+
 1. constant _t_, using the `--length t` option to specify it,
 1. drawn from a uniform distribution over [_a_, _b_], specifyed by
     `--min a  --max b`, and
