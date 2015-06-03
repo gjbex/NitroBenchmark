@@ -12,3 +12,4 @@ What is it?
 1. `R`: Script that computes a nonlinear regression on data points
     generated from a Gaussian function.  A driver to generate workloads
     according to various walltime distributions is included.
+1. `Tools`: some tools to convert workloads from one format to another.
