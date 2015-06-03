@@ -44,10 +44,13 @@ used.  It can generate workloads where the execution time of a work item
 is:
 
 1. constant _t_, using the `--length t` option to specify it,
-1. drawn from a uniform distribution over [_a_, _b_], specifyed by
-    `--min a  --max b`, and
-1. drawn from a gamma distrution with shape _lambda_, specified by
-    `--shape lambda`.
+1. drawn from a uniform distribution over [_tmin, _tmax], specifyed by
+    `--min tmin  --max tmax`, and
+1. drawn from a gamma distrution with shape _t_, specified by
+    `--shape t`.
+
+Times are in seconds, but the distributions may be shifted depeding on the
+performance of the compute nodes, and the quality of the compiler.
 
 For example, to create a workload consisting of 70 work items with a
 uniform distribution for their execution times in the interval
