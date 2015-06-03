@@ -24,7 +24,7 @@ $ make F90=ifort
 ```
 The default compiler is GCC, and the executable will be build statically.
 
-To run, `gauss_test.exe` expects three command line arguments:
+To run, `gauss_test.exe` expects four command line arguments:
 
 1. the number of points to compute the quadrature with,
 1. the lower bound of the integration domain,
