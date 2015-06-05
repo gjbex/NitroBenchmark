@@ -7,38 +7,43 @@ import numpy as np
 time_per_iteration = 0.0003
 nr_points = 10000
 payload = 'gauss_test.exe'
-cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads}\n'
+cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads} &> {output}\n'
+output_fmt = '{path}/output/out-{i:06d}.txt'
 
 
-def geeerate_output(script, nr_quads):
+def geeerate_output(script, nr_quads, output):
     a = np.random.uniform(-1.5, -0.5)
     b = np.random.uniform(2.5, 3.5)
     sys.stdout.write(cmd.format(script=script, nr_points=nr_points,
-                                a=a, b=b, nr_quads=nr_quads))
+                                a=a, b=b, nr_quads=nr_quads,
+                                output=output))
 
 
 def create_constant(nr_cmds, length, path):
     nr_quads = int(np.ceil(length/time_per_iteration))
     script = os.path.join(path, payload)
-    for _ in xrange(nr_cmds):
-        geeerate_output(script, nr_quads)
+    for i in xrange(nr_cmds):
+        output = output_fmt.format(path=path, i=i)
+        geeerate_output(script, nr_quads, output)
 
 
 def create_uniform(nr_cmds, min_time, max_time, path):
     min_n = int(np.ceil(min_time/time_per_iteration))
     max_n = int(np.ceil(max_time/time_per_iteration)) + 1
     script = os.path.join(path, 'gauss_test.exe')
-    for _ in xrange(nr_cmds):
+    for i in xrange(nr_cmds):
         nr_quads = np.random.randint(min_n, max_n)
-        geeerate_output(script, nr_quads)
+        output = output_fmt.format(path=path, i=i)
+        geeerate_output(script, nr_quads, output)
 
 
 def create_gamma(nr_cmds, avg_time, path):
     avg_n = int(np.ceil(avg_time/time_per_iteration))
     script = os.path.join(path, 'gauss_test.exe')
-    for _ in xrange(nr_cmds):
+    for i in xrange(nr_cmds):
         nr_quads = int(np.ceil(np.random.gamma(avg_n, 1.0)))
-        geeerate_output(script, nr_quads)
+        output = output_fmt.format(path=path, i=i)
+        geeerate_output(script, nr_quads, output)
 
 
 if __name__ == '__main__':
