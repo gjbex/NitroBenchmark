@@ -7,39 +7,43 @@ import numpy as np
 size = 100000
 noise = 0.001
 payload = 'gauss_fit_driver.sh'
-cmd = 'cmd={script} {size} {mu} {sigma} {noise} {n}\n'
+cmd = 'cmd={script} {size} {mu} {sigma} {noise} {n} &> {output}\n'
+output_fmt = '{path}/output/out-{i:06d}.txt'
 
 
-def generate_output(script, n):
+def generate_output(script, n, output):
     mu = np.random.uniform(-1.5, 0.0)
     sigma = np.random.uniform(0.2, 2.0)
     sys.stdout.write(cmd.format(script=script, size=size,
                                 mu=mu, sigma=sigma, noise=noise,
-                                n=n))
+                                n=n, output=output))
 
 
 def create_constant(nr_cmds, length, path):
     n = int(np.ceil(length/0.3))
     script = os.path.join(path, payload)
-    for _ in xrange(nr_cmds):
-        generate_output(script, n)
+    for i in xrange(nr_cmds):
+        output = output_fmt.format(path=path, i=i)
+        generate_output(script, n, output)
 
 
 def create_uniform(nr_cmds, min_time, max_time, path):
     min_n = int(np.ceil(min_time/0.3))
     max_n = int(np.ceil(max_time/0.3)) + 1
     script = os.path.join(path, payload)
-    for _ in xrange(nr_cmds):
+    for i in xrange(nr_cmds):
         n = np.random.randint(min_n, max_n)
-        generate_output(script, n)
+        output = output_fmt.format(path=path, i=i)
+        generate_output(script, n, output)
 
 
 def create_gamma(nr_cmds, avg_time, path):
     avg_n = int(np.ceil(avg_time/0.3))
     script = os.path.join(path, payload)
-    for _ in xrange(nr_cmds):
+    for i in xrange(nr_cmds):
         n = int(np.ceil(np.random.gamma(avg_n, 1.0)))
-        generate_output(script, n)
+        output = output_fmt.format(path=path, i=i)
+        generate_output(script, n, output)
 
 
 if __name__ == '__main__':
