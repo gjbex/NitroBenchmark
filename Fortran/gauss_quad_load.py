@@ -8,7 +8,7 @@ time_per_iteration = 0.0003
 nr_points = 10000
 payload = 'gauss_test.exe'
 cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads} &> {output}\n'
-output_fmt = '${{VSC_SCRATCH}}/output/out-{i:06d}.txt'
+output_fmt = '${{VSC_SCRATCH}}/output_Fortran/out-{i:06d}.txt'
 
 
 def geeerate_output(script, nr_quads, output):
