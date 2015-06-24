@@ -18,7 +18,7 @@ program integration_test
         read (buffer, fmt='(I10)') n
     else
         write (unit=error_unit, fmt='(A)') &
-            '#error: two command line argument expected, nr_points, ' // &
+            '#error: 4 command line argument expected, nr_points, ' // &
             'a, b, and N'
     end if
     call quad%init_gen_gauss(nr_points, eps)
