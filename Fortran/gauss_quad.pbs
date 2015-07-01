@@ -4,7 +4,7 @@
 #PBS -l pmem=1gb
 #PBS -m ae
 
-NITRO_PATH="/apps/leuven/nitro/nitro-20150601.111218.dd00e1f80f/"
+NITRO_PATH="/apps/leuven/nitro/nitro-20150623.120447.24db3a0b6d"
 JOB_DIR="${VSC_DATA}/Projects/NitroBenchmark/Fortran/Tests/nitro"
 
 if [ -z "${size}" ]
