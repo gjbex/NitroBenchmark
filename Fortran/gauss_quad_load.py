@@ -7,8 +7,8 @@ import numpy as np
 time_per_iteration = 0.0003
 nr_points = 10000
 payload = 'gauss_test.exe'
-cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads} &> {output}\n'
-output_fmt = '{scratch_path}/output_Fortran/out-{i:06d}.txt'
+cmd = 'cmd={script} {nr_points} {a} {b} {nr_quads} > {output}\n'
+output_fmt = '{scratch_path}/out-{i:06d}.txt'
 
 
 def geeerate_output(script, nr_quads, output):
