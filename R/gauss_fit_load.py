@@ -67,10 +67,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--avg', type=float, default=10.0,
                             help='shape of gamma distribution')
     options = arg_parser.parse_args()
-    if options.path:
-        path = options.path
-    else:
-        path = os.getcwd()
+    path = options.path if options.path else os.getcwd()
     if options.scratch_path:
         scratch_path = options.scratch_path
     else:
