@@ -9,8 +9,7 @@ sep = ','
 
 
 def extract_cmd(line):
-    match = extract_regex.search(line)
-    if match:
+    if match := extract_regex.search(line):
         params = match.group(1)
         return fmt_regex.sub(sep, params)
     else:
